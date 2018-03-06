@@ -9,8 +9,11 @@ public static int casillas_bajadas[];
 public static int casillas_subidas[];
 public static int toboganes=0;
 public static int escaleras=0;
+public static int a;
+public static int ancho;
 public static Scanner entrada = new Scanner(System.in);
 public static String jugadores[];
+public static String tablero[][];
 
     public static void main(String[] args) {
        menuprincipal();
@@ -48,13 +51,68 @@ public static String jugadores[];
 //        for (int j=0;j<jugadores.length;j++){
 //                    System.out.println("El jugador número "+(j+1)+" es "+jugadores[j]);
 //                }
-        System.out.println("El numero de escaleras es "+casillas_subidas.length);
-        System.out.println("El númeor de toboganes es "+casillas_bajadas.length);
+//        System.out.println("El numero de escaleras es "+casillas_subidas.length);
+//        System.out.println("El númeor de toboganes es "+casillas_bajadas.length);
+          System.out.println("el número de columnas es "+tablero.length);
+          System.out.println("El número de filas es "+tablero[0].length);
+          System.out.println("La variable a tiene un valor de "+ancho);
+        int contador=1;
+        
+        for (int i=0;i<tablero.length;i++){
+            for (int j=0;j<tablero[i].length;j++){
+                tablero[i][j]=(""+contador);
+                contador++;
+            }
+        }
+        if(ancho==1){
+        for(int u=4;u>-1;u--){
+            switch (u%2){
+                case 0:
+            for (String item : tablero[u]) {
+                System.out.print("\t"+"|" + item + "|" + "\t");
+            }
+                    System.out.println("");
+                    break;
+                default:
+                    for(int j=(tablero[u].length-1);j>=0;j--){
+                        System.out.print("\t"+"|"+tablero[u][j]+"|"+"\t");
+                    }
+                    System.out.println("");
+                    break;
+            }
+            }
+    }else if(ancho==2){
+        for(int p=19;p>-1;p--){
+            int r = p%2;
+            switch (r){
+                case 0:
+            for (int o=0;o<10;o++) {
+                System.out.print("\t"+"|" +tablero[p][o]+ "|" + "\t");
+            }
+                    System.out.println("");
+                    break;
+                default:
+                    for(int j=(tablero[p].length-1);j>=0;j--){
+                        System.out.print("\t"+"|"+tablero[p][j]+"|"+"\t");
+                    }
+                    System.out.println("");
+                    break;
+            }
+            }
     }
+//        for(int o=0;o<tablero.length;o++){
+//            for(int u=0;u<tablero[o].length;u++){
+//                System.out.print(tablero[o][u]+"\t");
+//                
+//            }
+//            System.out.print("");
+//        }
+    
+}
+    
     public static void dificultad(){
 //        Scanner entrada = new Scanner(System.in);
         String menudif [] = {"1. Fácil","2. Difícil","3. Regresar"};
-        int a;
         System.out.println("*****************************");
         do {for (String mdif:menudif)
             System.out.println(mdif);
@@ -63,12 +121,16 @@ public static String jugadores[];
         a = entrada.nextInt();
         switch (a){
             case 1:
+                ancho = 1;
                 System.out.println("Usted ha elegido la dificultad Fácil.");
                 dificultad = a;
+                tablero=new String[5][8];
                 break;
             case 2:
+                ancho=2;
                 System.out.println("Usted ha elegido la dificultad Dificil");
                 dificultad = a;
+                tablero=new String [20][10];
                 break;
             case 3:
                 menuprincipal();
@@ -78,6 +140,7 @@ public static String jugadores[];
         }
     public static void parametros(){
         int b;
+        
         String mparametros [] = {"1. Jugadores","2. Subidas y bajadas","3. Regresar"};
         System.out.println("******************************");
         do{for (String mpara:mparametros)
@@ -101,6 +164,7 @@ public static String jugadores[];
                 break;
             case 2:
                 if (dificultad==1){
+                                        
                     System.out.println("Escaleras");
                     do{
                     System.out.println("Ingrese una cantidad entre 5 a 10");
@@ -115,6 +179,8 @@ public static String jugadores[];
                     casillas_subidas= new int[escaleras];
                     casillas_bajadas= new int[toboganes];
                 }else if(dificultad==2){
+                    
+                    
                     System.out.println("Escaleras");
                     do{
                     System.out.println("Ingrese una cantidad entre 20 a 40");
@@ -128,6 +194,7 @@ public static String jugadores[];
                     }while((toboganes>40)||(toboganes<20));
                     casillas_subidas= new int[escaleras];
                     casillas_bajadas= new int[toboganes];
+                    
                 }
                
                 break;
@@ -157,6 +224,26 @@ public static String jugadores[];
             i++;
         }
     }
+    int contador=1;
+    if(dificultad==1){
+        tablero=new String[5][8];
+        for (int m=0;i<tablero.length;m++){
+            for (int j=0;j<tablero[m].length;j++){
+                tablero[m][j]=(""+contador);
+                contador++;
+            }
+        }
+    }else if (dificultad==2){
+        tablero=new String[20][10];
+        for (int m=0;i<tablero.length;m++){
+            for (int j=0;j<tablero[m].length;j++){
+                tablero[m][j]=(""+contador);
+                contador++;
+            }
+        }
+    }
+    
+                   
     int z=0;
     casillas_bajadas[z]=(int)(Math.random()*99);
     for(z=1;z<casillas_bajadas.length;z++){
@@ -194,7 +281,55 @@ public static String jugadores[];
             }
         }
     }
+//    for(row=0;row<20;row++){
+//        for(tower=0;tower<10;tower++){
+//            for(test=0;test<casillas_bajadas.length;test++){
+//                if (tablero[row][tower].equals(""+casillas_bajadas[test])){
+//                    tablero[row][tower]=matriz[row][tower]+"-";
+//                }
+//                if (tablero[row][tower].equals(""+casillas_subidas[test])){
+//                    tablero[row][tower]=matriz[row][tower]+"+";
+//                }
+//            }
+//        }
+//    }
     
+//        if(ancho==1){
+//        for(int u=4;u>-1;u--){
+//            switch (u%2){
+//                case 0:
+//            for (String item : tablero[u]) {
+//                System.out.print("\t"+"|" + item + "|" + "\t");
+//            }
+//                    System.out.println("");
+//                    break;
+//                default:
+//                    for(int j=(tablero[u].length-1);j>=0;j--){
+//                        System.out.print("\t"+"|"+tablero[u][j]+"|"+"\t");
+//                    }
+//                    System.out.println("");
+//                    break;
+//            }
+//            }
+//    }else if(ancho==2){
+//        for(int p=19;p>-1;p--){
+//            int r = p%2;
+//            switch (r){
+//                case 0:
+//            for (int o=0;o<10;o++) {
+//                System.out.print("\t"+"|" +tablero[p][o]+ "|" + "\t");
+//            }
+//                    System.out.println("");
+//                    break;
+//                default:
+//                    for(int j=(tablero[p].length-1);j>=0;j--){
+//                        System.out.print("\t"+"|"+tablero[p][j]+"|"+"\t");
+//                    }
+//                    System.out.println("");
+//                    break;
+//            }
+//            }
+//    }
         for(int u=9;u>-1;u--){
             switch (u%2){
                 case 0:
